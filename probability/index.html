@@ -1,6 +1,80 @@
 <!doctype html>
 <html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Musings in probability theory</title>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+    </script>
+    <style type="text/css">
+        body {
+            margin:40px auto;
+            max-width:900px;
+            line-height:1.6;
+            font-size:20px;
+            color:#444;
+            background: #f0f0f0;
+            padding:0 10px
+        }
+        h1,h2,h3{line-height:1.2}
+    </style>
+</head>
 <body>
-test
+
+    <h3>Boy or Girl paradox</h3>
+    <p>
+        Information learned: $BT$
+    </p>
+
+    <p>
+    <ul>
+        <li>$B_1$ = child 1 is a boy</li>
+        <li>$B_2$ = child 2 is a boy</li>
+        <li>$T_1$ = child 1 is born on a tuesday</li>
+        <li>$T_2$ = child 2 is born on a tuesday</li>
+    </ul>
+    </p>
+
+    <h4>Assumptions</h4>
+    <p>
+    Child 1 and 2 are indistinguishable:
+    <ul>
+        <li>$P(T_1) = P(T_2)$</li>
+        <li>$P(B_1) = P(B_2) = b$</li>
+    </ul>
+    The additional information $T$ is independent of the gender:
+    <ul>
+        <li>$P(T_1T_2B_1B_2) = P(T_1T_2)P(B_1)P(B_2)$</li>
+        <li>$P(T_1B_1B_2) = P(T_1)P(B_1)P(B_2)$</li>
+        <li>$P(T_2B_1B_2) = P(T_2)P(B_1)P(B_2)$</li>
+    </ul>
+    </p>
+
+    <h4>Theorem</h4>
+    <p>
+        $P(B_1B_2\ |\ B_1T_1 + B_2T_2) = \dfrac{2bP(T_1) - bP(T_1T_2)}{2P(T_1) - bP(T_1T_2)}$
+    </p>
+
+    <h4>Case: $T$ = child is the younger than the other one</h4>
+    <p>
+        Cannot be true for both children at the same time: $P(T_1T_2) = 0$.
+        Equation reduces to $b = 1/2$.
+    </p>
+
+    <h4>Case: $T$ is empty</h4>
+    <p>
+        For $P(T_1) = 1$, and $P(T_1T_2) = 1$ this equation reduces to $b/(2-b) = 1/3$.
+    </p>
+
+    <h4>Case: $T$ = child is born on a tuesday</h4>
+    <p>
+    $t = 1/7$, $P(T_1 T_2) = P(T_1)P(T_2) = 1/49$.
+    The equation reduces to $13/27$.
+    </p>
+
 </body>
 </html>
