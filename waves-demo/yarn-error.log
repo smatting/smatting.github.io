@@ -1,0 +1,32 @@
+Arguments: 
+  /Users/stefan/.nvm/versions/node/v9.7.1/bin/node /Users/stefan/.nvm/versions/node/v9.7.1/bin/yarn build
+
+PATH: 
+  /Users/stefan/.nvm/versions/node/v9.7.1/bin:/Users/stefan/miniconda2/bin:/usr/local/go/bin:/Users/stefan/.cargo/bin:/Users/stefan/.bin:/Users/stefan/.cargo/bin:/Users/stefan/.nix-profile/bin:/Users/stefan/.nix-profile/sbin:/Users/stefan/.nix-profile/lib/kde4/libexec:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/nix/var/nix/profiles/default/lib/kde4/libexec:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/Users/stefan/miniconda2/bin:/Users/stefan/.cargo/bin:/Users/stefan/.bin:/Users/stefan/.nix-profile/bin:/Users/stefan/.nix-profile/sbin:/Users/stefan/.nix-profile/lib/kde4/libexec:/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/nix/var/nix/profiles/default/lib/kde4/libexec:/Users/stefan/.local/bin:/usr/local/bin:/Users/stefan/.local/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.7.1
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Couldn't find a package.json file in "/Users/stefan/Repos/smatting.github.io/waves-demo"
+      at new MessageError (/Users/stefan/.nvm/versions/node/v9.7.1/lib/node_modules/yarn/lib/cli.js:186:110)
+      at /Users/stefan/.nvm/versions/node/v9.7.1/lib/node_modules/yarn/lib/cli.js:40048:15
+      at Generator.next (<anonymous>)
+      at step (/Users/stefan/.nvm/versions/node/v9.7.1/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /Users/stefan/.nvm/versions/node/v9.7.1/lib/node_modules/yarn/lib/cli.js:109:13
+      at <anonymous>

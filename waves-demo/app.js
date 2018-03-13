@@ -403,8 +403,21 @@ var app = Elm.Main.embed(mountNode);
 
 window.saveSVG = function() {
     // var svgData = $("#wave-svg")[0].outerHTML;
-    var svgData = document.querySelector("#wave-svg").outerHTML;
-    var svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
+    var svgData = document.querySelector("#wave-svg");
+
+    //get svg source.
+    var serializer = new XMLSerializer();
+    var source = serializer.serializeToString(svgData);
+
+    //add name spaces.
+    if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+        source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+    }
+
+    var svgBlob = new Blob([source], {type:"image/svg+xml;charset=utf-8"});
     var svgUrl = URL.createObjectURL(svgBlob);
     var downloadLink = document.createElement("a");
     downloadLink.href = svgUrl;
@@ -10322,13 +10335,13 @@ var _user$project$Main$init = function () {
 			topControlPoint1dy: 25,
 			topControlPoint2dx: -12,
 			topControlPoint2dy: 25,
-			topEndPoint2dx: -13,
-			topEndPoint2dy: 20,
-			bottomEndPoint1: {ctor: '_Tuple2', _0: 700.0, _1: 200.0},
+			topEndPoint2dx: -12,
+			topEndPoint2dy: 25,
+			bottomEndPoint1: {ctor: '_Tuple2', _0: 700.0, _1: 250.0},
 			bottomControlPoint1: {ctor: '_Tuple2', _0: 800.0, _1: 450.0},
 			bottomControlPoint2: {ctor: '_Tuple2', _0: 1000.0, _1: 250.0},
-			bottomEndPoint1dx: -10,
-			bottomEndPoint1dy: 22,
+			bottomEndPoint1dx: -12,
+			bottomEndPoint1dy: 25,
 			bottomControlPoint1dx: 3,
 			bottomControlPoint1dy: 17,
 			bottomControlPoint2dx: 50,
