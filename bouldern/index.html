@@ -37,8 +37,18 @@
           "mark": "bar",
           "encoding": {
             "x": {"field": "day", "type": "ordinal", "sort": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]},
-            "y": {"field": "count", "type": "quantitative"}
-          }
+            "y": {"field": "count_sum", "type": "quantitative"}
+          },
+          "transform": [
+                       {
+                         "aggregate": [{
+                          "op": "sum",
+                          "field": "count",
+                          "as": "count_sum"
+                         }],
+                         "groupby": ["day"]
+                       }
+                     ]
       },
       {
         "hconcat": [
@@ -71,16 +81,36 @@
                       "mark": "bar",
                       "encoding": {
                         "x": {"field": "hour", "type": "ordinal"},
-                        "y": {"field": "count", "type": "quantitative"}
-                      }
+                        "y": {"field": "count_sum", "type": "quantitative"}
+                      },
+                      "transform": [
+                          {
+                            "aggregate": [{
+                             "op": "sum",
+                             "field": "count",
+                             "as": "count_sum"
+                            }],
+                            "groupby": ["hour"]
+                          }
+                        ]
                   },
                   {
-                      "transform": [{"filter": {"selection": {"or": ["mouse", "touch"]}}}],
                       "mark": {"type": "bar", "color": "red"},
                       "encoding": {
                         "x": {"field": "hour", "type": "ordinal"},
-                        "y": {"field": "count", "type": "quantitative"}
-                      }
+                        "y": {"field": "count_sum", "type": "quantitative"}
+                      },
+                      "transform": [
+                          {"filter": {"selection": {"or": ["mouse", "touch"]}}},
+                          {
+                            "aggregate": [{
+                             "op": "sum",
+                             "field": "count",
+                             "as": "count_sum"
+                            }],
+                            "groupby": ["hour"]
+                          },
+                        ]
                   }
               ]
           }
