@@ -41,27 +41,50 @@
           }
       },
       {
-          "mark": "bar",
-          "encoding": {
-            "x": {"field": "day", "type": "ordinal", "sort": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]},
-            "y": {"field": "count", "type": "quantitative"}
-          },
-          "selection": {
-              "mouse": {
-                "type": "single", "fields": ["hour"],
-                "init": {"hour": 18},
-                "bind": {
-                    "hour": {"input": "range", "min": 9, "max": 22, "step": 1, "name": "Uhrzeit"}
-                }
+        "hconcat": [
+          {
+              "mark": "bar",
+              "encoding": {
+                "x": {"field": "day", "type": "ordinal", "sort": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]},
+                "y": {"field": "count", "type": "quantitative"}
               },
-              "touch": {
-                  "type": "interval",
-                  "on": "[touchstart, touchend] > touchmove",
-                  "translate": "[touchstart, touchend] > touchmove",
-                  "mark": {"fill": "#fdbb84", "fillOpacity": 0.5, "stroke": "#e34a33"}
-             }
+              "selection": {
+                  "mouse": {
+                    "type": "single", "fields": ["hour"],
+                    "init": {"hour": 18},
+                    "bind": {
+                        "hour": {"input": "range", "min": 9, "max": 22, "step": 1, "name": "Uhrzeit"}
+                    }
+                  },
+                  "touch": {
+                      "type": "interval",
+                      "on": "[touchstart, touchend] > touchmove",
+                      "translate": "[touchstart, touchend] > touchmove",
+                      "mark": {"fill": "#fdbb84", "fillOpacity": 0.5, "stroke": "#e34a33"}
+                 }
+              },
+              "transform": [{"filter": {"selection": {"or": ["mouse", "touch"]}}}]
           },
-          "transform": [{"filter": {"selection": {"or": ["mouse", "touch"]}}}]
+          {
+              "layer": [
+                  {
+                      "mark": "bar",
+                      "encoding": {
+                        "x": {"field": "hour", "type": "ordinal"},
+                        "y": {"field": "count", "type": "quantitative"}
+                      }
+                  },
+                  {
+                      "transform": [{"filter": {"selection": {"or": ["mouse", "touch"]}}}],
+                      "mark": {"type": "bar", "color": "red"},
+                      "encoding": {
+                        "x": {"field": "hour", "type": "ordinal"},
+                        "y": {"field": "count", "type": "quantitative"}
+                      }
+                  }
+              ]
+          }
+        ]
       }
   ],
   "data": {
