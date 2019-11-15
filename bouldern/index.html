@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bouldern</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.7.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.0-beta.11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.0.0"></script>
+  </head>
+  <body>
+    <div id="container">
+        <div id="vis"></div>
+    </div>
+    <style>
+/*
+        #vis {
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            border: 1px solid black;
+                display: block;
+        };
+        */
+        #container {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 400px;
+        }
+    </style>
+
+    <script type="text/javascript">
+      var yourVlSpec = 
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "A simple bar chart with embedded data.",
+  "vconcat": [
+      {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "day", "type": "ordinal", "sort": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]},
+            "y": {"field": "count", "type": "quantitative"}
+          }
+      },
+      {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "day", "type": "ordinal", "sort": ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]},
+            "y": {"field": "count", "type": "quantitative"}
+          },
+          "selection": {
+              "mouse": {
+                "type": "single", "fields": ["hour"],
+                "init": {"hour": 18},
+                "bind": {
+                    "hour": {"input": "range", "min": 9, "max": 22, "step": 1, "name": "Uhrzeit"}
+                }
+              },
+              "touch": {
+                  "type": "interval",
+                  "on": "[touchstart, touchend] > touchmove",
+                  "translate": "[touchstart, touchend] > touchmove",
+                  "mark": {"fill": "#fdbb84", "fillOpacity": 0.5, "stroke": "#e34a33"}
+             }
+          },
+          "transform": [{"filter": {"selection": {"or": ["mouse", "touch"]}}}]
+      }
+  ],
+  "data": {
+    "values": [{"hour": 0, "day": "Sa", "count": 1337}, {"hour": 1, "day": "Sa", "count": 1337}, {"hour": 2, "day": "Mo", "count": 2674}, {"hour": 8, "day": "Fr", "count": 10696}, {"hour": 8, "day": "Mo", "count": 2674}, {"hour": 8, "day": "Do", "count": 10696}, {"hour": 8, "day": "Di", "count": 2674}, {"hour": 8, "day": "Mi", "count": 9359}, {"hour": 9, "day": "Fr", "count": 279433}, {"hour": 9, "day": "Mo", "count": 205898}, {"hour": 9, "day": "Sa", "count": 5348}, {"hour": 9, "day": "So", "count": 17381}, {"hour": 9, "day": "Do", "count": 251356}, {"hour": 9, "day": "Di", "count": 239323}, {"hour": 9, "day": "Mi", "count": 250019}, {"hour": 10, "day": "Fr", "count": 319543}, {"hour": 10, "day": "Mo", "count": 224616}, {"hour": 10, "day": "Sa", "count": 711284}, {"hour": 10, "day": "So", "count": 593628}, {"hour": 10, "day": "Do", "count": 215257}, {"hour": 10, "day": "Di", "count": 188517}, {"hour": 10, "day": "Mi", "count": 287455}, {"hour": 11, "day": "Fr", "count": 314195}, {"hour": 11, "day": "Mo", "count": 250019}, {"hour": 11, "day": "Sa", "count": 617694}, {"hour": 11, "day": "So", "count": 627053}, {"hour": 11, "day": "Do", "count": 236649}, {"hour": 11, "day": "Di", "count": 208572}, {"hour": 11, "day": "Mi", "count": 259378}, {"hour": 12, "day": "Fr", "count": 322217}, {"hour": 12, "day": "Mo", "count": 264726}, {"hour": 12, "day": "Sa", "count": 564214}, {"hour": 12, "day": "So", "count": 740698}, {"hour": 12, "day": "Do", "count": 224616}, {"hour": 12, "day": "Di", "count": 228627}, {"hour": 12, "day": "Mi", "count": 263389}, {"hour": 13, "day": "Fr", "count": 291466}, {"hour": 13, "day": "Mo", "count": 270074}, {"hour": 13, "day": "Sa", "count": 576247}, {"hour": 13, "day": "So", "count": 717969}, {"hour": 13, "day": "Do", "count": 259378}, {"hour": 13, "day": "Di", "count": 227290}, {"hour": 13, "day": "Mi", "count": 239323}, {"hour": 14, "day": "Fr", "count": 418481}, {"hour": 14, "day": "Mo", "count": 322217}, {"hour": 14, "day": "Sa", "count": 623042}, {"hour": 14, "day": "So", "count": 758079}, {"hour": 14, "day": "Do", "count": 272748}, {"hour": 14, "day": "Di", "count": 250019}, {"hour": 14, "day": "Mi", "count": 306173}, {"hour": 15, "day": "Fr", "count": 500038}, {"hour": 15, "day": "Mo", "count": 367675}, {"hour": 15, "day": "Sa", "count": 625716}, {"hour": 15, "day": "So", "count": 855680}, {"hour": 15, "day": "Do", "count": 378371}, {"hour": 15, "day": "Di", "count": 331576}, {"hour": 15, "day": "Mi", "count": 366338}, {"hour": 16, "day": "Fr", "count": 602987}, {"hour": 16, "day": "Mo", "count": 439873}, {"hour": 16, "day": "Sa", "count": 553518}, {"hour": 16, "day": "So", "count": 848995}, {"hour": 16, "day": "Do", "count": 528115}, {"hour": 16, "day": "Di", "count": 533463}, {"hour": 16, "day": "Mi", "count": 514745}, {"hour": 17, "day": "Fr", "count": 752731}, {"hour": 17, "day": "Mo", "count": 755405}, {"hour": 17, "day": "Sa", "count": 602987}, {"hour": 17, "day": "So", "count": 808885}, {"hour": 17, "day": "Do", "count": 934563}, {"hour": 17, "day": "Di", "count": 981358}, {"hour": 17, "day": "Mi", "count": 866376}, {"hour": 18, "day": "Fr", "count": 1082970}, {"hour": 18, "day": "Mo", "count": 1413209}, {"hour": 18, "day": "Sa", "count": 477309}, {"hour": 18, "day": "So", "count": 708610}, {"hour": 18, "day": "Do", "count": 1887844}, {"hour": 18, "day": "Di", "count": 2216746}, {"hour": 18, "day": "Mi", "count": 1954694}, {"hour": 19, "day": "Fr", "count": 890442}, {"hour": 19, "day": "Mo", "count": 1320956}, {"hour": 19, "day": "Sa", "count": 479983}, {"hour": 19, "day": "So", "count": 494690}, {"hour": 19, "day": "Do", "count": 1728741}, {"hour": 19, "day": "Di", "count": 2183321}, {"hour": 19, "day": "Mi", "count": 1903888}, {"hour": 20, "day": "Fr", "count": 473298}, {"hour": 20, "day": "Mo", "count": 680533}, {"hour": 20, "day": "Sa", "count": 314195}, {"hour": 20, "day": "So", "count": 339598}, {"hour": 20, "day": "Do", "count": 743372}, {"hour": 20, "day": "Di", "count": 925204}, {"hour": 20, "day": "Mi", "count": 748720}, {"hour": 21, "day": "Fr", "count": 149744}, {"hour": 21, "day": "Mo", "count": 237986}, {"hour": 21, "day": "Sa", "count": 104286}, {"hour": 21, "day": "So", "count": 98938}, {"hour": 21, "day": "Do", "count": 208572}, {"hour": 21, "day": "Di", "count": 295477}, {"hour": 21, "day": "Mi", "count": 240660}, {"hour": 22, "day": "Fr", "count": 41447}, {"hour": 22, "day": "Mo", "count": 21392}, {"hour": 22, "day": "Sa", "count": 16044}, {"hour": 22, "day": "So", "count": 14707}, {"hour": 22, "day": "Do", "count": 22729}, {"hour": 22, "day": "Di", "count": 22729}, {"hour": 22, "day": "Mi", "count": 22729}, {"hour": 23, "day": "Fr", "count": 6685}, {"hour": 23, "day": "Sa", "count": 2674}]
+  }
+}
+
+          ;
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>
+</html>
