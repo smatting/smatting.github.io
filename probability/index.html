@@ -27,54 +27,65 @@
 
     <h3>Boy or Girl paradox</h3>
     <p>
-        Information learned: $BT$
-    </p>
+        This is bayesian treatment of the paradox, which doesn't require speaking about samplings or any of that nonesense.
 
+        Information learned: Mr Smith has two children. At least one of them is a boy and we also learn fact $T$ about it.
+
+        Let's label those children $1$ and $2$.
     <p>
     <ul>
         <li>$B_1$ = child 1 is a boy</li>
         <li>$B_2$ = child 2 is a boy</li>
-        <li>$T_1$ = child 1 is born on a tuesday</li>
-        <li>$T_2$ = child 2 is born on a tuesday</li>
+        <li>$T_1$ = T holds for child 1 </li>
+        <li>$T_2$ = T holds for child 2</li>
+
+        <li>$BT = B_1 T_1 + B_2 T_2$ = the information we learn.
     </ul>
     </p>
 
     <h4>Assumptions</h4>
     <p>
-    Child 1 and 2 are indistinguishable:
+    Child 1 and 2 are indistinguishable. So we should be able to switch $1$ and $2$ in any equations.
     <ul>
-        <li>$P(T_1) = P(T_2)$</li>
-        <li>$P(B_1) = P(B_2) = b$</li>
+        <li>$P(T_1) = P(T_2) = t$</li>
+        <li>$P(B_1) = P(B_2) = \frac{1}{2}$</li>
     </ul>
-    The additional information $T$ is independent of the gender:
+
+    <h4>Without any assumptions</h4>
     <ul>
-        <li>$P(T_1T_2B_1B_2) = P(T_1T_2)P(B_1)P(B_2)$</li>
-        <li>$P(T_1B_1B_2) = P(T_1)P(B_1)P(B_2)$</li>
-        <li>$P(T_2B_1B_2) = P(T_2)P(B_1)P(B_2)$</li>
+      <li>$P(B_1 B_2\ |\ BT) = \frac{P(BT)P(B_1 B_2\ |\ B_1 B_2)}{P(BT)}$</li>
+      <li>$P(BT) = P(BT\ |\ B_1 B_2)P(B_1 B_2) + P(BT\ |\ \bar{B_1} B_2)P(\bar{B_1} B_2) + P(BT\ |\ B_1 \bar{B_2})P(B_1 \bar{B_2}) + P(BT\ |\ \bar{B_1} \bar{B_2})P(\bar{B_1} \bar{B_2})$</li>
+      <li>$P(BT\ |\ \bar{B_1} B_2) = P(B_1 T_1 + B_2 T_2\ |\ \bar{B_1} B_2) = P(T_2\ |\ \bar{B_1} B_2) = P(T_2) = t$</li>
+      <li>$P(BT\ |\ B_1 \bar{B_2}) = t$ the same</li>
+      <li>$P(BT\ |\ \bar{B_1} \bar{B_2}) = 0$ obviously</li>
+      <li>$P(B_1 T_1 + B_2 T_2\ |\ B_1 B_2) = P(T_1 + T_2\ |\ B_1 B_2)$ trivially</li>
     </ul>
-    </p>
 
-    <h4>Theorem</h4>
-    <p>
-        $P(B_1B_2\ |\ B_1T_1 + B_2T_2) = \dfrac{2bP(T_1) - bP(T_1T_2)}{2P(T_1) - bP(T_1T_2)}$
-    </p>
+    <h4>Case: $T$ = child is the younger of the two</h4>
+    <ul>
+      <li>
+        Cannot be true for both children at the same time, so it holds that
+      </li>
+      <li>
+        $P(T_1 + T_2\ |\ B_1 B_2) = P(T_1\ |\ B_1 B_2) + P(T_2\ |\ B_1 B_2 ) = 2 t $ 
+      </li>
+      <li>
+        Plug everything together to arrive at $P(B_1 B_2\ |\ BT) = \frac{1}{2}$
+      </li>
+    </ul>
 
-    <h4>Case: $T$ = child is the younger than the other one</h4>
-    <p>
-        Cannot be true for both children at the same time: $P(T_1T_2) = 0$.
-        Equation reduces to $b = 1/2$.
-    </p>
-
-    <h4>Case: $T$ is empty</h4>
-    <p>
-        For $P(T_1) = 1$, and $P(T_1T_2) = 1$ this equation reduces to $b/(2-b) = 1/3$.
-    </p>
-
-    <h4>Case: $T$ = child is born on a tuesday</h4>
-    <p>
-    $t = 1/7$, $P(T_1 T_2) = P(T_1)P(T_2) = 1/49$.
-    The equation reduces to $13/27$.
-    </p>
+    <h4>Case: $T_1, T_2$ are independent. For example $T$ = child born on a tuesday</h4>
+    <ul>
+      <li>$Q(\cdot) = P(\cdot |\ B_1 B_2)$ for brevity</li>
+      <li>$Q(T_1 + T_2) = Q(T_1 \bar{T_2} + T_1 T_2 + T_2 \bar{T_1})$ holds always (look at venn diagram)</li>
+      <li>$Q(T_1 \bar{T_2} + T_1 T_2 + T_2 \bar{T_1}) = Q(T_1 \bar{T_2}) + Q(T_1 T_2) + Q(T_2 \bar{T_1})$ because mutually exclusive (venn)</li>
+      <li>$Q(T_1 \bar{T_2}) = Q(T_1) Q(\bar{T_2}) = t \cdot (1-t)$  independence</li>
+      <li>$Q(T_2 \bar{T_1}) = Q(T_2) Q(\bar{T_1}) = t \cdot (1-t)$  independence</li>
+      <li>$Q(T_1 T_2) = t^2$ independence</li>
+      <li>
+        Plug everything together to arrive at $P(B_1 B_2\ |\ BT) = \frac{2 - t}{4 - t}$
+      </li>
+    </ul>
 
 </body>
 </html>
